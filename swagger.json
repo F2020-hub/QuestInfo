@@ -1,0 +1,967 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Mentor API",
+      "description": "A node express mentor API"
+    },
+    "host": "3.145.39.125:5000",
+    "basePath": "/v1/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/users/signup": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OTP send successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/users/verifyOtp": {
+        "post": {
+          "tags": [
+            "Verify Account"
+          ],
+          "description": "Enter otp and verify user account",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to verify",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OTP verified successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/users/resendOtp": {
+        "post": {
+          "tags": [
+            "Verify Account"
+          ],
+          "description": "Resend otp if pervious get expired",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to get otp again",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OTP send successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/users/forgotPassword": {
+        "post": {
+          "tags": [
+            "Forgot password"
+          ],
+          "description": "Forgot password API just pass phone in it and get reset password otp",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Get forgot password otp on phone number if user forgot their account password",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OTP send successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/users/verifyOtpAfterForgotPassword": {
+        "post": {
+          "tags": [
+            "Forgot password"
+          ],
+          "description": "Verification of otp in forgot password process",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Verification of otp in forgot password process",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OTP verified successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/createPassword/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "integer"
+          }
+        ],
+        "put": {
+          "summary": "Update user password with give ID",
+          "tags": [
+            "Forgot password"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Password is updated successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/users/signin": {
+        "post": {
+          "tags": [
+            "Sign in - Login"
+          ],
+          "description": "Signin (Authenticate user & get token)",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Signin (Authenticate user & get token)",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Login success",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/users/updateBasicProfileInfo": {
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "required": true,
+            "description": "add authentication token that you get from login api",
+            "type": "string"
+          }
+        ],
+        "put": {
+          "summary": "Update user with give ID",
+          "tags": [
+            "Users"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Profile updated successfully.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/users/updateBasicProfileInfoStep2": {
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "required": true,
+            "description": "add authentication token that you get from login api",
+            "type": "string"
+          }
+        ],
+        "put": {
+          "summary": "Update profile basic info step 2",
+          "tags": [
+            "Users"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Profile updated successfully.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/users/addDropdown": {
+        "post": {
+          "tags": [
+            "Dropdown"
+          ],
+          "description": "Create a dropdown item",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Create a dropdown item",
+              "schema": {
+                "$ref": "#/definitions/Dropdown"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Record updated successfully",
+              "schema": {
+                "$ref": "#/definitions/Dropdown"
+              }
+            }
+          }
+        } 
+      },
+      "/users/getDropdown": {
+        "get": {
+            "tags": [
+              "Dropdown"
+            ],
+            "summary": "Get all dropdown values for app",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Dropdown"
+                }
+              }
+            }
+          }
+      },
+      "/users/searchTeacherWithClassFilters": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            },
+            {
+                "name": "discipline_or_topic",
+                "in": "query",
+                "description": "discipline or topic name enter by user",
+                "type": "string"
+            },
+            {
+                "name": "address_or_class_link",
+                "in": "query",
+                "description": "address name enter by user",
+                "type": "string"
+            },
+            {
+                "name": "time_of_class",
+                "in": "query",
+                "description": "",
+                "type": "integer"
+            },
+            {
+                "name": "session_type",
+                "in": "query",
+                "description": "1 => local , 2 => online",
+                "type": "integer"
+            },
+            {
+                "name": "private_or_group",
+                "in": "query",
+                "description": "1 => Private, 2 => group",
+                "type": "string"
+            },
+            {
+                "name": "class_level",
+                "in": "query",
+                "description": "1 => Beginner, 2 => Intermediate, 3 => Advanced",
+                "type": "string"
+            },
+            {
+                "name": "minimum_price",
+                "in": "query",
+                "description": "minimum price value",
+                "type": "integer"
+            },
+            {
+                "name": "maximum_price",
+                "in": "query",
+                "description": "maximum price value",
+                "type": "integer"
+            }
+          ],
+        "get": {
+            "tags": [
+              "Search"
+            ],
+            "summary": "Search and filter classes",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Classes"
+                }
+              }
+            }
+          }
+      },
+      "/users/getTopicsAndDiscipline": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            },
+            {
+                "name": "discipline_or_topic",
+                "in": "query",
+                "required":true,
+                "description": "discipline or topic name enter by user show suggestions ",
+                "type": "string"
+            }
+          ],
+        "get": {
+            "tags": [
+              "Search"
+            ],
+            "summary": "Get topics or discipline suggestions",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Classes"
+                }
+              }
+            }
+          }
+      },
+      "/users/getAddresses": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            },
+            {
+                "name": "address",
+                "in": "query",
+                "required":true,
+                "description": "address name enter by user to show suggestions ",
+                "type": "string"
+            }
+          ],
+        "get": {
+            "tags": [
+              "Search"
+            ],
+            "summary": "Get addresses suggestion ",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Classes"
+                }
+              }
+            }
+          }
+      },
+      "/users/getPopularTags": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            }
+          ],
+        "get": {
+            "tags": [
+              "Search"
+            ],
+            "summary": "Show popular tags in search popup",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Tags"
+                }
+              }
+            }
+          }
+      },
+      "/users/getTeacherPublicProfileForStudent/{teacherId}": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            },
+            {
+                "name": "teacherId",
+                "in": "path",
+                "required": true,
+                "description": "ID of teacher that we want to find",
+                "type": "string"
+              }
+          ],
+        "get": {
+            "tags": [
+              "Teacher"
+            ],
+            "summary": "About Teacher",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+      },
+      "/users/getClassesListForStudent/{teacherId}": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            },
+            {
+                "name": "teacherId",
+                "in": "path",
+                "required": true,
+                "description": "ID of teacher that we want to find",
+                "type": "string"
+              }
+          ],
+        "get": {
+            "tags": [
+              "Teacher"
+            ],
+            "summary": "Get classes list of selected teacher",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Classes"
+                }
+              }
+            }
+          }
+      },
+      "/users/getClassDetailForStudent/{teacherId}/{class_id}": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            },
+            {
+                "name": "teacherId",
+                "in": "path",
+                "required": true,
+                "description": "ID of teacher that we want to find",
+                "type": "string"
+            },
+            {
+                "name": "class_id",
+                "in": "path",
+                "required": true,
+                "description": "ID of class that we want to find",
+                "type": "string"
+            }
+          ],
+        "get": {
+            "tags": [
+              "Teacher"
+            ],
+            "summary": "Get classes detail of selected teacher",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Classes"
+                }
+              }
+            }
+          }
+      },
+      "/users/featuredTeachers": {
+        "parameters": [
+            {
+              "name": "x-auth-token",
+              "in": "header",
+              "required": true,
+              "description": "add authentication token that you get from login api",
+              "type": "string"
+            }
+          ],
+        "get": {
+            "tags": [
+              "Teacher"
+            ],
+            "summary": "Show featured teachers",
+            "responses": {
+              "200": {
+                "description": "Record fetched successfully.",
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+      },
+      "/users/addToWishlist": {
+        "post": {
+          "tags": [
+            "Wishlist"
+          ],
+          "description": "Wishlist of student",
+          "parameters": [
+            {
+                "name": "x-auth-token",
+                "in": "header",
+                "required": true,
+                "description": "add authentication token that you get from login api",
+                "type": "string"
+            },
+            {
+              "name": "teacher_id",
+              "in": "path",
+              "required":true,
+              "description": "Add teacher id",
+              "schema": {
+                "$ref": "#/definitions/Wishlist"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Wishlist added successfully",
+              "schema": {
+                "$ref": "#/definitions/Wishlist"
+              }
+            }
+          }
+        } 
+      },
+      "/users/getWishlistOfStudent": {
+        "get": {
+          "tags": [
+            "Wishlist"
+          ],
+          "description": "Wishlist of student",
+          "parameters": [
+            {
+                "name": "x-auth-token",
+                "in": "header",
+                "required": true,
+                "description": "add authentication token that you get from login api",
+                "type": "string"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Data fetched successfully.",
+              "schema": {
+                "$ref": "#/definitions/Wishlist"
+              }
+            }
+          }
+        } 
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": [
+          "_id"
+        ],
+        "properties": {
+          "_id": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+        "phone":{
+            "type": "number",
+            "description": "contact number to register a user"
+        },
+        "user_role":{
+            "type": "number",
+            "description": "1 for student and 2 for teacher"
+        },
+        "accept_terms_and_conditions":{
+            "type": "boolean",
+            "description": "0 for not accept and 1 for accept"
+        },
+        "deleted":{
+            "type": "number",
+            "description": "0 for active account and 1 for deleted account"
+        },
+        "account_verified":{
+            "type": "number",
+            "description": "0 for otp verification is not done yet and 1 for verified account after otp verification"
+        },
+        "otp":{
+            "type": "number",
+            "description": "otp number that need verification"
+        },
+        "otp_expired":{
+            "type": "date",
+            "description": "otp number expiration time that need verification"
+        },
+        "account_status":{
+            "type": "number",
+            "description": "account 0 => Need verification, status is 1 => Active, 2 => Suspended , 3 => Deleted."
+        },
+        "first_name":{
+            "type": "string",
+            "description": "User first name"
+        },
+        "last_name":{
+            "type": "string",
+            "description": "user last name"
+        },
+        "gender":{
+            "type": "number",
+            "description": "number of gender option coming from dropdown options"
+        },
+        "dob":{
+            "type": "string",
+            "description": "date of birth of user"
+        },
+        "age":{
+            "type": "number",
+            "description": "age of user"
+        },
+        "street_address":{
+            "type": "string",
+            "description": "street address of user"
+        },
+        "city":{
+            "type": "string",
+            "description": "city of user"
+        },
+        "state":{
+            "type": "string",
+            "description": "state of user"
+        },
+        "zip_code":{
+            "type": "string",
+            "description": "zip code of user"
+        },
+        "topics":{
+            "type": "array",
+            "description": "topics for student profile"
+        },
+        "expertise":{
+            "type": "string",
+            "description": "expertise of user (teacher)"
+        },
+        "about_expertise":{
+            "type": "string",
+            "description": "Describe expertise for teacher profile"
+        },
+        "language":{
+            "type": "string",
+            "description": "language for teacher"
+        },
+        "intro_video":{
+            "type": "string",
+            "description": "intro video of teacher"
+        },
+        "profile_image":{
+            "type": "string",
+            "description": "profile image url coming from s3 bucket"
+        },
+        "planned_topics":{
+            "type": "array",
+            "description": "planned topics (teacher)"
+        },
+        "profile_created":{
+            "type": "boolean",
+            "description": "true if account created with two steps complete and false if any step is pending"
+        }
+        }
+      },
+      "Dropdown": {
+        "required": [
+          "name",
+          "companies"
+        ],
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "options": {
+                "type": ["string"]
+            }
+         
+        }
+      },
+      "Classes": {
+        "required": [
+          "name",
+          "companies"
+        ],
+        "properties": {
+            "discipline": {
+                "type": "string"
+              },
+              "class_status": {
+                "type":"number",
+                "default": 0,
+                "description":"0 => Draft, 1 => Published , 2 => Archived"
+              },
+              "topics": {
+                "type":["string"]
+              },
+              "topics_text": {
+                "type":["string"]
+              },
+              "class_title": {
+                "type": "string"
+              },
+              "class_subtitle": {
+                "type": "string"
+              },
+              "class_description": {
+                "type": "string"
+              },
+              "class_level": {
+                "type":"number"
+              },
+              "language_of_class":{
+                "type": "string"
+              },
+              "cover_image":{
+                "type": "string"
+              },
+              "type_of_class":{
+                "type": "number",
+                "description":" 1 => on demand, 2 => single class , 3 => course"
+              },
+              "session_type": {
+                "type":"number"
+              },
+              "session_duration": {
+                "type":"number"
+              },
+              "price": {
+                "type":"number"
+              },
+              "max_students_allowed": {
+                "type":"number"
+              },
+              "enrolled_students": {
+                "type":"number"
+              },
+              "address_or_class_link":{
+                "type": "string"
+              },
+              "class_detail":[
+                {
+                  "class_date": {
+                    "type": "date"
+                  },
+                  "class_start_time": {
+                    "type": "string"
+                  },
+                  "class_end_time": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "created_by":{
+                "type": "string"
+              },
+              "location": {
+                "type": {
+                  "type": "string",
+                  "enum": ["Point"]
+                },
+                "coordinates": {
+                  "type": ["number"],
+                  "index": "2dsphere"
+                }
+              },
+              "created_at": {
+                "type": "date"
+              },
+              "updated_at": {
+                "type": "date"
+              }
+         
+        }
+      },
+      "Tags": {
+        "required": [
+          "tag_name"
+        ],
+        "properties": {
+            "tag_name": {
+                "type": "string"
+            },
+            "tag_status": {
+                "type": "boolean"
+            },
+            "tag_type": {
+                "type": "number"
+            }
+         
+        }
+      },
+      "Wishlist": {
+        "required": [
+          "student_id",
+          "teacher_id"
+        ],
+        "properties": {
+            "student_id": {
+                "type": "string"
+            },
+            "teacher_id": {
+                "type": "string"
+            },
+            "created_at":{
+                "type": "date"
+            }
+         
+        }
+      }
+     
+    }
+  }
+
+  

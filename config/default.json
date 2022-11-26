@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://Fakher:Fakher@cluster0.drdis8g.mongodb.net/Fakher?retryWrites=true&w=majority",
+  "jwtSecret": "secret",
+  "githubClientId": "",
+  "githubSecret": ""
+}
