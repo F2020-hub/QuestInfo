@@ -1,0 +1,49 @@
+
+.mainUpload.zoneHover {
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    border: 2px dashed gray;
+}
+
+.file {height: 120px;display: flex;background: linear-gradient(to bottom, #EEE, #DDD);border-radius: 20px;position: relative;z-index: 10;flex-direction: column;width: 120px;justify-content: center;}
+
+.info {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+span.size {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 0.5em;
+                background: lightgray;
+                border-radius: 3px;
+                }
+
+span.name {
+    font-size: 12px;
+    margin-bottom: 0.5em;
+    border-radius: 3px;
+    background: lightgray;
+}
+
+.progressBar {
+    bottom: 14px;
+    width: 100%;
+    position: absolute;
+    padding: 0 10px;
+}
+
+.remove {
+    width: 23px;
+    top: 6px;
+    right: 6px;
+    position: absolute;
+    height: 23px;
+}
